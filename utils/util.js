@@ -1,13 +1,23 @@
 const validate = require('./validate.js')
 
 const formatTime = date => {
-	const year = date.getFullYear()
-	const month = date.getMonth() + 1
-	const day = date.getDate()
-	const hour = date.getHours()
-	const minute = date.getMinutes()
-	const second = date.getSeconds()
-	return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+		//13位时间戳
+		if (data.toString().length == 10) {
+			data = data * 1000
+		}
+		let date = new Date(data*1)
+		let year = date.getFullYear()
+		let month = date.getMonth() + 1
+		let day = date.getDate()
+		let hour = date.getHours()
+		let minute = date.getMinutes()
+		//补0
+		month = month < 10 ? '0' + month : month
+		day = day < 10 ? '0' + day : day
+		hour = hour < 10 ? '0' + hour : hour
+		minute = minute < 10 ? '0' + minute : minute
+		//格式
+		return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute].map(formatNumber).join(':')
 }
 const formatNumber = n => {
 	n = n.toString()
@@ -142,36 +152,16 @@ const phoneXing = val => {
 	return val
 }
 
-//时间戳转换
-const timestampToTime = data => {
-	//13位时间戳
-	if (data.toString().length == 10) {
-		data = data * 1000
-	}
-	let date = new Date(data*1)
-	let year = date.getFullYear()
-	let month = date.getMonth() + 1
-	let day = date.getDate()
-	let hour = date.getHours()
-	let minute = date.getMinutes()
-	month = month < 10 ? '0' + month : month
-	day = day < 10 ? '0' + day : day
-	hour = hour < 10 ? '0' + hour : hour
-	minute = minute < 10 ? '0' + minute : minute
-	return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute].map(formatNumber).join(':')
-}
-
 module.exports = {
-	formatTime: formatTime,
-	filterForm: filterForm,
-	getCurrentPageUrlWithArgs: getCurrentPageUrlWithArgs,
-	getUrlParam: getUrlParam,
-	isWeiXinBrowser: isWeiXinBrowser,
-	isMiniPg: isMiniPg,
-	resetPageUrl: resetPageUrl,
-	getClientCode: getClientCode,
-	imgUrlToBase64: imgUrlToBase64,
-	getCurPage: getCurPage,
+	formatTime,
+	filterForm,
+	getCurrentPageUrlWithArgs,
+	getUrlParam,
+	isWeiXinBrowser,
+	isMiniPg,
+	resetPageUrl,
+	getClientCode,
+	imgUrlToBase64,
+	getCurPage,
 	phoneXing,
-	timestampToTime,
 }

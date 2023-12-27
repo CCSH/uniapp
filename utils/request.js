@@ -1,19 +1,13 @@
-import aes from '@/utils/aes.js'
-
 const request = (url, method, data, showLoading) => {
 	return new Promise((resolve, reject) => {
 		//调试接口
 		let showModal = false
-		let temp = {
-			...data,
-			millis: Date.now(), //时间戳
-		}
+
 		//统一处理
 		let _data = {
-			channel: 'E20B4E99D1', //渠道号
+			...data,
+			userId: 'ccsh',
 		}
-		//需要加密
-		_data.params = aes.encrypt(JSON.stringify(temp))
 
 		if (showLoading) {
 			uni.showLoading({
@@ -27,22 +21,16 @@ const request = (url, method, data, showLoading) => {
 			withCredentials: true,
 			header: {},
 			success(res) {
-				let val = ''
-				try {
-					val = JSON.parse(aes.decrypt(res.data))
-				} catch (error) {
-					val = res.data
-				}
-				console.log(method + '请求：' + url, '\n入参：', temp, '\n响应：', val)
+				//解析响应
+				let resData = JSON.parse(res.data)
+				console.log(method + '请求：' + url, '\n入参：', _data, '\n响应：', resData)
 				if (showModal) {
 					uni.showModal({
 						title: '提示',
-						content: method + '请求：' + url + '\n入参：' + JSON.stringify(temp) +
-							'\n响应：' + JSON.stringify(val),
-						success(res) {},
+						content: method + '请求：' + url + '\n入参：' + JSON.stringify(_data) + '\n响应：' + JSON.stringify(resData),
 					})
 				}
-
+				//判断请求是否成功
 				if (res.statusCode == 200) {
 					resolve(val)
 				} else {
@@ -75,25 +63,23 @@ const request = (url, method, data, showLoading) => {
 					// 	title: '系统开小差了，请稍后再试',
 					// 	icon: 'none',
 					// })
-					reject()
+					reject(res.errMsg)
 				}
 			},
 			fail(error) {
-				console.log(method + '请求：' + url, '\n入参：', temp, '\n响应：', error.errMsg)
+				console.log(method + '请求：' + url, '\n入参：', _data, '\n响应：', error.errMsg)
 
 				if (showModal) {
 					uni.showModal({
 						title: '提示',
-						content: method + '请求：' + url + '\n入参：' + JSON.stringify(temp) +
-							'\n响应：' + JSON.stringify(val),
-						success(res) {},
+						content: method + '请求：' + url + '\n入参：' + JSON.stringify(_data) + '\n响应：' + JSON.stringify(error.errMsg),
 					})
 				}
 				uni.showToast({
 					title: '系统开小差了，请稍后再试',
 					icon: 'none',
 				})
-				reject(error)
+				reject(error.errMsg)
 			},
 			complete(res) {
 				if (showLoading) {
