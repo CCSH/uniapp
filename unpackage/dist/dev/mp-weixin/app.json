@@ -1,17 +1,18 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/order/order",
+    "pages/message/message",
     "pages/mine/mine"
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uniapp",
-    "navigationBarBackgroundColor": "#F8F8F8"
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#51BBA4"
   },
   "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#999999",
+    "color": "#666666",
+    "selectedColor": "#38C4AB",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
@@ -22,6 +23,18 @@
         "text": "首页"
       },
       {
+        "pagePath": "pages/order/order",
+        "iconPath": "static/tabbar_home.png",
+        "selectedIconPath": "static/tabbar_home_h.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "iconPath": "static/tabbar_home.png",
+        "selectedIconPath": "static/tabbar_home_h.png",
+        "text": "消息"
+      },
+      {
         "pagePath": "pages/mine/mine",
         "iconPath": "static/tabbar_mine.png",
         "selectedIconPath": "static/tabbar_mine_h.png",
@@ -29,5 +42,6 @@
       }
     ]
   },
+  "preloadRule": {},
   "usingComponents": {}
 }

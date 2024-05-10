@@ -1,35 +1,65 @@
 {
-	"pages": [{
+	"pages": [
+		{
 			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "首页",
-				"navigationBarBackgroundColor": "#FFF",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "专业陪诊"
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "订单"
+			}
+		},
+		{
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": "消息"
 			}
 		},
 		{
 			"path": "pages/mine/mine",
 			"style": {
-				"navigationBarTitleText": "我的",
-				"navigationBarBackgroundColor": "#FFF",
-				"disableScroll": true
+				"navigationBarTitleText": "我的"
 			}
 		}
 	],
-	"subPackages": [{
-		"root": "packageA",
-		"pages": []
-	}],
+	"subPackages": [
+		{
+			"root": "pagesA",
+			"pages": []
+		}
+	],
+	"preloadRule": {
+		// "pages/home/home": {
+		// "network": "all",
+		// "packages": ["pagesA"]
+		// }
+	},
 	"tabBar": {
-		"color": "#999999",
-		"selectedColor": "#999999",
+		"color": "#666666",
+		"selectedColor": "#38C4AB",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"list": [{
+		"list": [
+			{
 				"pagePath": "pages/home/home",
 				"iconPath": "static/tabbar_home.png",
 				"selectedIconPath": "static/tabbar_home_h.png",
 				"text": "首页"
+			},
+			{
+				"pagePath": "pages/order/order",
+				"iconPath": "static/tabbar_home.png",
+				"selectedIconPath": "static/tabbar_home_h.png",
+				"text": "订单"
+			},
+			{
+				"pagePath": "pages/message/message",
+				"iconPath": "static/tabbar_home.png",
+				"selectedIconPath": "static/tabbar_home_h.png",
+				"text": "消息"
 			},
 			{
 				"pagePath": "pages/mine/mine",
@@ -40,8 +70,7 @@
 		]
 	},
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uniapp",
-		"navigationBarBackgroundColor": "#F8F8F8"
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#51BBA4"
 	}
 }
